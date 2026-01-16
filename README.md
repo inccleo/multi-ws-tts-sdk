@@ -2,6 +2,7 @@
 
 [![Go](https://img.shields.io/badge/Go-1.21+-00ADD8?style=flat&logo=go)](https://golang.org/)
 [![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=flat&logo=python)](https://www.python.org/)
+[![Java](https://img.shields.io/badge/Java-8+-007396?style=flat&logo=openjdk)](https://www.java.com/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 > 🎯 **企业级多上下文 WebSocket TTS SDK**  
@@ -50,6 +51,27 @@ pip install git+https://github.com/inccleo/multi-ws-tts-sdk.git#subdirectory=py
 
 ---
 
+### [Java SDK](./java/) 
+
+```xml
+<!-- Maven -->
+<dependency>
+    <groupId>com.inccleo</groupId>
+    <artifactId>multi-ws-tts-sdk</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
+**特点：**
+- ☕ Java 8+ 兼容
+- 🔒 线程安全设计
+- 🎯 函数式回调 (Lambda)
+- 🔗 链式调用 API
+
+[📖 Java SDK 文档](./java/README.md) | [查看示例](./java/examples/)
+
+---
+
 ## 🚀 快速开始
 
 ### Go 示例
@@ -95,6 +117,34 @@ async def main():
     await ctx.close()
 
 asyncio.run(main())
+```
+
+### Java 示例
+
+```java
+import com.inccleo.tts.TTSClient;
+import com.inccleo.tts.TTSContext;
+
+public class QuickStart {
+    public static void main(String[] args) throws Exception {
+        TTSClient client = new TTSClient(baseUrl, apiKey, voiceID);
+        client.connect(Map.of(
+            "model_id", "flash_v2_5",
+            "format", "pcm_16000"
+        ));
+        
+        TTSContext ctx = client.createContext("ctx_001");
+        ctx.onAudio((audio, isFinal) -> {
+            // 处理音频数据
+        });
+        
+        ctx.sendText("你好，世界", true);
+        ctx.endInput();
+        Thread.sleep(3000);
+        ctx.close();
+        client.disconnect();
+    }
+}
 ```
 
 ## 📊 架构设计
@@ -148,6 +198,15 @@ pip install -e .
 python examples/simple_example.py
 ```
 
+### Java SDK
+
+```bash
+cd java
+mvn clean compile
+javac -cp "..." examples/SimpleExample.java
+java -cp "..." SimpleExample
+```
+
 ## 🤝 贡献
 
 欢迎提交 Issue 和 Pull Request！
@@ -166,7 +225,7 @@ MIT License
 
 <div align="center">
 
-**[Go SDK](./go/)** · **[Python SDK](./py/)** · **[API 文档](./multi-context-websocket-sdk-guide.md)**
+**[Go SDK](./go/)** · **[Python SDK](./py/)** · **[Java SDK](./java/)**
 
 Made with ❤️ for developers
 
