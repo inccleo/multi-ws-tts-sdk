@@ -156,10 +156,6 @@ SDK 支持服务器返回的 camelCase 和 snake_case 两种字段格式：
 4. 推送到远程仓库
 5. 创建版本标签
 
-### 手动发布
-
-详细步骤请参考 [PUBLISH_GUIDE.md](./PUBLISH_GUIDE.md)
-
 ### 用户安装
 
 发布后，用户可以通过以下方式安装：
